@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Mar 11 16:18:34 2015
-
+to use this script, you have to install some packages, run the following command:
+sudo apt-get install python-numpy python-h5py python-tifffile 
 @author: jingpeng
 """
 #%% parameters
