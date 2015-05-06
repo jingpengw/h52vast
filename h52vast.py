@@ -24,11 +24,13 @@ invol = np.asarray(f['/main'])
 f.close()
 
 #%% transform
-if len(invol.shape)==3:
+if invol.dtype=='float32':
+	# gray image
 	outvol = (invol-invol.min()) / (invol.max()-invol.min()) * 255
 	outvol = outvol.astype('uint8')
-elif len(invol.shape)==4:
-	vol = np.asarray(invol* ((2**24-1)/float(invol.max())), dtype='uint32') 
+elif invol.dtype=='uint24':
+	# RGB image
+	vol = np.asarray(invol* ((2**24-1)/float(invol.max())), dtype='uint32')
 	outvol = np.zeros( np.append(np.array( invol.shape ), 3), dtype='uint8')
 
 	outvol[:,:,:, 0] = np.remainder( invol, 256)
@@ -36,10 +38,9 @@ elif len(invol.shape)==4:
 	outvol[:,:,:, 2] = invol / 25536
 else:
     print "invalid file, please have a check using hdfview."
-    
+
 #%% write as tiff
 import tifffile
 filename.replace(".h5", "")
 filename.replace("hdf5", "")
 tifffile.imsave(filename+".tif", outvol)
-
