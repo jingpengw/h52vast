@@ -28,7 +28,7 @@ if invol.dtype=='float32':
 	# gray image
 	outvol = (invol-invol.min()) / (invol.max()-invol.min()) * 255
 	outvol = outvol.astype('uint8')
-elif invol.dtype=='uint24':
+elif invol.dtype=='uint32':
 	# RGB image
 	vol = np.asarray(invol* ((2**24-1)/float(invol.max())), dtype='uint32')
 	outvol = np.zeros( np.append(np.array( invol.shape ), 3), dtype='uint8')
