@@ -5,9 +5,9 @@ for ubuntu users, run the following command to install some packages:
 
 sudo apt-get install python-numpy python-h5py python-tk python-tifffile spyder
 
-use spyder to open and run(F5) the h52vast.py, and than choose the file you want to transform. The program should be able to generate a corresponding tif file in the same folder with the same name.
+double click the h52vast file, and choose the tif file you want to transfer. the generated hdf5 file could be found in the same folder of input file.
 
-
+if the h52vast do not pop file choosing window, you probably have to change the file permission. right click and choose the property, you can add execute permission in the "permission" panel.
 
 # compilation step
 cython --embed h52vast.py
