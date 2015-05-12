@@ -37,7 +37,7 @@ elif invol.dtype=='uint32':
 	outvol[:,:,:, 1] = np.remainder( invol, 25536) / 256
 	outvol[:,:,:, 2] = invol / 25536
 else:
-    print "invalid file, please have a check using hdfview."
+	print "invalid file, please have a check using hdfview."
 
 #%% write as tiff
 import tifffile
