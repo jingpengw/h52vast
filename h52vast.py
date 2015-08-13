@@ -8,7 +8,7 @@ sudo apt-get install python-numpy python-h5py python-tifffile python-tk
 """
 #%% parameters
 import numpy as np
-
+import tifffile
 #%% get filename
 from Tkinter import Tk
 from tkFileDialog import askopenfilename
@@ -18,11 +18,15 @@ filename = askopenfilename() # show an "Open" dialog box and return the path to 
 print "filename: {}".format(filename)
 
 #%% read the data
-import h5py
-f = h5py.File( filename )
-invol = np.asarray(f['/main'])
-f.close()
-
+if "h5" in filename or "hdf5" in filename:
+    import h5py
+    f = h5py.File( filename )
+    invol = np.asarray(f['/main'])
+    f.close()
+elif "tif" in filename:
+    invol = tifffile.imread(filename)
+else:
+    print "invalid data type"
 #%% transform
 if invol.dtype=='float32':
 	# gray image
@@ -42,5 +46,7 @@ else:
 #%% write as tiff
 import tifffile
 filename.replace(".h5", "")
-filename.replace("hdf5", "")
+filename.replace(".hdf5", "")
+filename.replace(".tiff", "")
+filename.replace(".tif", "")
 tifffile.imsave(filename+".tif", outvol)
